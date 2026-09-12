@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Central ADO / TMOM - Firebase</title>
+<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
 <script type="importmap">{"imports":{"firebase/app":"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js","firebase/database":"https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js"}}</script>
 <style>
 :root{--rojo:#d10024}*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}body{background:#f2f2f2;color:#111}
@@ -27,7 +28,6 @@ label{font-size:12px;font-weight:800;color:#666;text-transform:uppercase}input,s
 <header><h1>Central TMOM / ADO <small id="status" style="font-size:11px;color:green">● Conectado</small></h1><img id="logoHeader" style="height:40px;display:none"></header>
 <div class="container">
 <div class="tabs"><button id="tabPas" class="tab active" onclick="switchTab('pasajero',this)">PASAJERO</button><button id="tabAdm" class="tab" onclick="requestAdmin(this)">ADMIN</button></div>
-
 <div id="view-pasajero" class="card">
 <label>Operador</label><select id="opBusca"><option value="TODOS">Todos</option><option value="TMOM">TMOM</option><option value="ADO">ADO</option></select>
 <label>Tu nombre de rol</label><input id="nombreRol" placeholder="Ej: alexmartz057">
@@ -38,7 +38,6 @@ label{font-size:12px;font-weight:800;color:#666;text-transform:uppercase}input,s
 <h3 style="color:var(--rojo);margin-bottom:8px">Servicios Activos Ahora</h3>
 <div id="activos"><small>Cargando de Firebase...</small></div>
 </div>
-
 <div id="view-admin" class="card" style="display:none">
 <label>SUBIR LOGO (se sincroniza a todos)</label><input type="file" id="logoInput" accept="image/*">
 <h3 style="margin:14px 0 8px;color:#d10024">Agregar Servicio</h3>
@@ -52,12 +51,9 @@ label{font-size:12px;font-weight:800;color:#666;text-transform:uppercase}input,s
 <h3 style="margin:18px 0 8px;color:#d10024">Servicios en la nube</h3><div id="listaServ"></div>
 <button class="btn btn-sec" style="margin-top:14px" onclick="logoutAdmin()">Cerrar sesión Admin</button>
 </div>
-
 <div id="boletoWrap" class="card"><h3 style="color:var(--rojo);margin-bottom:12px">Tu Boleto</h3><div id="boletoReal" class="ticket-real"></div><button class="btn" style="margin-top:12px" onclick="window.print()">Imprimir</button><button class="btn btn-sec" style="margin-top:8px" onclick="document.getElementById('boletoWrap').style.display='none'">Cerrar</button></div>
 </div>
-
 <div id="passModal"><div class="box"><h2>Insertar contraseña</h2><p style="font-size:13px;color:#555;margin-bottom:10px">Contraseña de Admin</p><input id="passInput" type="password" placeholder="Contraseña"><div id="passError" style="color:var(--rojo);font-size:12px;display:none;margin-bottom:10px">Contraseña incorrecta</div><button class="btn" onclick="checkPass()">Entrar</button><button class="btn btn-sec" style="margin-top:8px" onclick="closePass()">Cancelar</button></div></div>
-
 <script type="module">
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onValue, remove, push } from "firebase/database";
@@ -68,8 +64,7 @@ const firebaseConfig = {
   projectId: "centraladotmom",
   storageBucket: "centraladotmom.firebasestorage.app",
   messagingSenderId: "524503776536",
-  appId: "1:524503776536:web:b60e7d3c115b43049f326d",
-  measurementId: "G-2JDDE7HSTD"
+  appId: "1:524503776536:web:b60e7d3c115b43049f326d"
 };
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -84,11 +79,11 @@ window.closePass=()=>document.getElementById('passModal').style.display='none';
 window.checkPass=()=>{if(normalizePass(document.getElementById('passInput').value)==='unionadotmom'){isAdmin=true;closePass();document.getElementById('view-pasajero').style.display='none';document.getElementById('view-admin').style.display='block';document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tabAdm').classList.add('active');}else{document.getElementById('passError').style.display='block';}}
 window.logoutAdmin=()=>{isAdmin=false;document.getElementById('view-admin').style.display='none';document.getElementById('view-pasajero').style.display='block';document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tabPas').classList.add('active');}
 document.getElementById('passInput').addEventListener('keydown',e=>{if(e.key==='Enter')window.checkPass();});
-document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{set(logoRef, r.result);};r.readAsDataURL(f);});
+document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{set(logoRef, r.result).catch(err=>alert('Error logo: '+err));};r.readAsDataURL(f);});
 window.addParada=()=>{const n=prompt('Parada intermedia:');if(n){paradas.push(n);renderParadas();}}
 window.renderParadas=()=>{document.getElementById('paradasBox').innerHTML=paradas.map((p,i)=>`<span style='background:#ffe5e5;padding:4px 8px;border-radius:12px;font-size:12px;margin:2px;display:inline-block'>${p} <b onclick='paradas.splice(${i},1);renderParadas()' style='cursor:pointer'>x</b></span>`).join('');}
-window.agregarServicio=()=>{const s={id:Date.now(),operador:document.getElementById('opAdd').value,desde:document.getElementById('desdeAdd').value,hasta:document.getElementById('hastaAdd').value,empresa:document.getElementById('empresaAdd').value,precio:document.getElementById('precioAdd').value,hora:document.getElementById('horaAdd').value,dia:document.getElementById('diaAdd').value,paradas:[...paradas]};if(!s.desde||!s.hasta||!s.empresa)return alert('Falta desde/hasta/empresa');const newRef=push(serviciosRef);set(newRef,s);paradas=[];window.renderParadas();alert('Guardado en Firebase');}
-onValue(serviciosRef,(snap)=>{const data=snap.val();servicios=data?Object.values(data):[];renderAdmin();renderActivos();window._data=data;});
+window.agregarServicio=()=>{const s={id:Date.now(),operador:document.getElementById('opAdd').value,desde:document.getElementById('desdeAdd').value,hasta:document.getElementById('hastaAdd').value,empresa:document.getElementById('empresaAdd').value,precio:document.getElementById('precioAdd').value,hora:document.getElementById('horaAdd').value,dia:document.getElementById('diaAdd').value,paradas:[...paradas]};if(!s.desde||!s.hasta||!s.empresa)return alert('Falta desde/hasta/empresa');const newRef=push(serviciosRef);set(newRef,s).then(()=>{paradas=[];window.renderParadas();alert('Guardado en Firebase');}).catch(e=>alert('Error Firebase: '+e));}
+onValue(serviciosRef,(snap)=>{const data=snap.val();servicios=data?Object.values(data):[];renderAdmin();renderActivos();window._data=data;document.getElementById('status').textContent='● Conectado ('+servicios.length+')';document.getElementById('status').style.color='green';},(err)=>{document.getElementById('status').textContent='● Error: '+err.message;document.getElementById('status').style.color='red';document.getElementById('activos').innerHTML='<b style=color:red>Error Firebase: revisa las Reglas en modo prueba</b>';});
 onValue(logoRef,(snap)=>{logoData=snap.val()||'';if(logoData){document.getElementById('logoHeader').src=logoData;document.getElementById('logoHeader').style.display='block';}});
 function renderAdmin(){const c=document.getElementById('listaServ');if(!servicios.length){c.innerHTML='<small>Sin servicios</small>';return;}c.innerHTML=servicios.map(s=>`<div class='admin-item'><div><span class='badge'>${s.operador}</span> <b>${s.desde} → ${s.hasta}</b><br><small>${s.empresa} | R$ ${s.precio} | ${s.hora}</small></div><button class='btn' style='width:auto;padding:6px 10px' onclick='borrar(${s.id})'>Borrar</button></div>`).join('');}
 function renderActivos(){const c=document.getElementById('activos');if(!servicios.length){c.innerHTML='<small>No hay servicios activos</small>';return;}c.innerHTML=servicios.map(s=>`<div class='result'><span class='badge'>${s.operador} ACTIVO</span> <b>${s.desde} → ${s.hasta}</b> <small>${s.empresa} | ${s.hora} | R$ ${s.precio}</small></div>`).join('');}
