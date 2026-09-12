@@ -2,133 +2,101 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grupo UQT | RoleHaven</title>
-
-<link rel="icon" type="image/jpeg" href="https://i.ibb.co/HDPxz5J6/IMG-20260423-WA0013.jpg">
-<meta property="og:title" content="Grupo UQT | RoleHaven - Transporte Oficial">
-<meta property="og:description" content="El grupo de transporte más grande de RoleHaven. Terminal Intermodal Mansiones - Wolf Court.">
-<meta property="og:image" content="https://i.ibb.co/HDPxz5J6/IMG-20260423-WA0013.jpg">
-<meta property="og:url" content="https://GrupoUQT.github.io/Rolehaven">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#1E4D6E">
-
+<title>Central ADO / TMOM - Firebase</title>
+<script type="importmap">{"imports":{"firebase/app":"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js","firebase/database":"https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js"}}</script>
 <style>
-:root{--main:#1E4D6E;--sec:#5DBF6A;--bg:#0a1218;--card:#13202d}
-body{margin:0;background:var(--bg);color:white;font-family:Inter,Arial,sans-serif}
-.top{position:fixed;top:0;width:100%;background:var(--main);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;z-index:100;border-bottom:3px solid var(--sec);box-sizing:border-box}
-.logo{font-weight:900}.logo span{color:var(--sec)}
-#menuBtn{font-size:26px;cursor:pointer}
-#sideMenu{position:fixed;left:-300px;top:54px;width:280px;height:100%;background:#0e1c27;transition:0.3s;padding:20px;z-index:99;border-right:1px solid var(--main)}
-#sideMenu.open{left:0}
-#sideMenu a{display:block;padding:14px;color:white;text-decoration:none;border-bottom:1px solid #1a3247}
-#adminBtn{cursor:pointer;background:var(--sec);color:#0a1218;padding:6px 12px;border-radius:6px;font-size:13px;font-weight:900}
-.main{margin-top:70px;padding:20px}
-.hero{background:var(--card);padding:30px;border-left:5px solid var(--sec);border-radius:8px}
-.card{background:var(--card);padding:18px;margin:15px 0;border-radius:8px;border:1px solid #1a3247}
-.hidden{display:none}
-input,textarea,select{background:#0a1218;color:white;border:1px solid var(--main);width:100%;padding:10px;margin:6px 0;border-radius:6px;box-sizing:border-box}
-button{background:var(--main);border:1px solid var(--sec);color:white;padding:10px;border-radius:6px;width:100%;font-weight:bold;cursor:pointer;margin:6px 0}
-button:hover{background:var(--sec);color:#0a1218}
-.btn-sm{width:auto;padding:5px 10px;font-size:12px;margin-left:6px}
-.admin-panel{background:#0a1218;border:1px solid var(--sec);padding:20px;border-radius:10px}
-.est-item{display:flex;justify-content:space-between;align-items:center;background:#13202d;padding:8px 12px;margin:5px 0;border-radius:6px;border-left:3px solid var(--sec)}
-.calc-box{background:#13202d;border:2px solid var(--sec);padding:15px;border-radius:8px;margin-top:10px}
+:root{--rojo:#d10024}*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}body{background:#f2f2f2;color:#111}
+header{background:white;border-bottom:4px solid var(--rojo);padding:14px 18px;display:flex;justify-content:space-between;align-items:center}header h1{color:var(--rojo);font-size:20px}
+.container{max-width:900px;margin:18px auto;padding:0 12px}.card{background:white;border-radius:14px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.07);margin-bottom:16px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.tab{flex:1;padding:11px;border-radius:10px;border:2px solid var(--rojo);background:#fff;color:var(--rojo);font-weight:900;cursor:pointer}.tab.active{background:var(--rojo);color:#fff}
+label{font-size:12px;font-weight:800;color:#666;text-transform:uppercase}input,select{width:100%;padding:11px;border-radius:9px;border:1.5px solid #ddd;margin:6px 0 12px;font-size:14px}
+.btn{background:var(--rojo);color:#fff;border:none;padding:12px;border-radius:9px;font-weight:900;width:100%;cursor:pointer}.btn-sec{background:#111}
+.badge{background:var(--rojo);color:#fff;padding:3px 8px;border-radius:20px;font-size:11px}.result{border:1.5px solid #eee;border-radius:12px;padding:12px;margin-bottom:10px}.similar{border:1.5px dashed var(--rojo);background:#fff5f5}
+#boletoWrap{display:none}.ticket-real{background:#fff;width:100%;max-width:480px;margin:0 auto;border-radius:6px;border:1px solid #e5e5e5;padding:22px 22px 12px}
+.ticket-real .compra{text-align:center;color:var(--rojo);font-weight:900;font-size:22px}.line-red-short{width:160px;height:2px;background:var(--rojo);margin:8px auto 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.logo-box{flex:1;min-height:60px;display:flex;align-items:center}.logo-box img{max-height:54px;max-width:200px;object-fit:contain}.logo-box .txt-logo{color:var(--rojo);font-weight:900;font-size:34px}
+.qr{width:90px;height:90px;background:#fff;border:2px solid #000;display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(9,1fr);gap:1px;padding:3px}.qr div{background:#fff}.qr div.b{background:#000}
+.divider{height:3px;background:var(--rojo);margin:12px 0}.field{margin-bottom:10px}.field .lbl{font-size:11px;color:#666;font-weight:700}.field .val{font-size:26px;font-weight:900;line-height:1.1;text-transform:uppercase;word-break:break-word}.field.small-val .val{font-size:22px}
+.footer{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:12px}.legal{font-size:7.5px;line-height:1.25;max-width:58%;font-weight:600}.barcode{height:44px;width:180px;background:repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 6px,transparent 6px 7px,#000 7px 9px,transparent 9px 12px);margin-bottom:2px}
+.admin-item{display:flex;justify-content:space-between;align-items:center;padding:9px;border:1px solid #eee;border-radius:9px;margin-bottom:6px}
+#passModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:999;align-items:center;justify-content:center;padding:20px}#passModal .box{background:white;border-radius:16px;padding:24px;max-width:360px;width:100%;border-top:5px solid var(--rojo)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 </style>
 </head>
 <body>
-<div class="top">
-<div style="display:flex;gap:15px;align-items:center"><span id="menuBtn">☰</span><div class="logo">GRUPO <span>UQT</span></div></div>
-<div id="adminBtn" onclick="showLogin()">ADMIN LOGIN</div>
+<header><h1>Central TMOM / ADO <small id="status" style="font-size:11px;color:green">● Conectado</small></h1><img id="logoHeader" style="height:40px;display:none"></header>
+<div class="container">
+<div class="tabs"><button id="tabPas" class="tab active" onclick="switchTab('pasajero',this)">PASAJERO</button><button id="tabAdm" class="tab" onclick="requestAdmin(this)">ADMIN</button></div>
+
+<div id="view-pasajero" class="card">
+<label>Operador</label><select id="opBusca"><option value="TODOS">Todos</option><option value="TMOM">TMOM</option><option value="ADO">ADO</option></select>
+<label>Tu nombre de rol</label><input id="nombreRol" placeholder="Ej: alexmartz057">
+<div class="grid2"><div><label>Desde</label><input id="desdeBusca" placeholder="Pachuca"></div><div><label>Hasta</label><input id="hastaBusca" placeholder="Puebla"></div></div>
+<button class="btn" onclick="buscar()">Buscar</button>
+<div id="resultados" style="margin-top:16px"></div>
+<hr style="margin:20px 0">
+<h3 style="color:var(--rojo);margin-bottom:8px">Servicios Activos Ahora</h3>
+<div id="activos"><small>Cargando de Firebase...</small></div>
 </div>
 
-<div id="sideMenu">
-<a href="#" onclick="showSec('inicio')">🏠 Inicio</a>
-<a href="#" onclick="showSec('noticias')">📰 Noticias</a>
-<a href="#" onclick="showSec('boletos')">🎫 Comprar Boletos</a>
-<a href="#" onclick="showSec('soporte')">💬 Soporte</a>
-<div id="adminLinks" class="hidden"><hr><b style="color:var(--sec)">ADMIN UQT</b><a href="#" onclick="showSec('admin')">⚙️ Administración</a><a href="#" onclick="logout()">🚪 Salir</a></div>
+<div id="view-admin" class="card" style="display:none">
+<label>SUBIR LOGO (se sincroniza a todos)</label><input type="file" id="logoInput" accept="image/*">
+<h3 style="margin:14px 0 8px;color:#d10024">Agregar Servicio</h3>
+<label>Operador</label><select id="opAdd"><option>TMOM</option><option>ADO</option></select>
+<label>Empresa</label><input id="empresaAdd" placeholder="AUTOBUSES TMOM / ADO">
+<div class="grid2"><div><label>Desde</label><input id="desdeAdd"></div><div><label>Hasta</label><input id="hastaAdd"></div></div>
+<div class="grid2"><div><label>Hora</label><input id="horaAdd" type="time" value="14:30"></div><div><label>Día</label><input id="diaAdd" type="date"></div></div>
+<label>Precio en Robux R$</label><input id="precioAdd" type="number" placeholder="650">
+<div id="paradasBox" style="margin:8px 0"></div><button class="btn btn-sec" style="margin-bottom:10px" onclick="addParada()">+ Parada intermedia</button>
+<button class="btn" onclick="agregarServicio()">Guardar en Firebase</button>
+<h3 style="margin:18px 0 8px;color:#d10024">Servicios en la nube</h3><div id="listaServ"></div>
+<button class="btn btn-sec" style="margin-top:14px" onclick="logoutAdmin()">Cerrar sesión Admin</button>
 </div>
 
-<div class="main">
-<div id="sec-inicio"><div class="hero"><h1 id="inicioTitulo"></h1><p id="inicioTexto"></p><div id="inicioImgs"></div></div><h2>Últimas Noticias</h2><div id="previewNoticias"></div></div>
-<div id="sec-noticias" class="hidden"><h2>Noticias</h2><div id="listaNoticias"></div></div>
-<div id="sec-boletos" class="hidden"><h2>Comprar Boletos - Desde / Hasta</h2><div id="listaServicios"></div></div>
-<div id="sec-soporte" class="hidden"><h2>Soporte</h2><div id="listaSoporte"></div></div>
-<div id="sec-login" class="hidden"><div class="card" style="max-width:350px;margin:auto"><h3>Login Admin</h3><input id="user" placeholder="UQT"><input id="pass" type="password"><button onclick="login()">Entrar</button><p id="loginErr"></p></div></div>
-<div id="sec-admin" class="hidden">
-<div class="admin-panel">
-<h2 style="color:var(--sec)">PANEL ADMIN UQT - SISTEMA ESTACIONES</h2>
-<h3>1. Inicio</h3>
-<input id="editTitulo"><textarea id="editTexto"></textarea><button onclick="guardarInicio()">Modificar texto en inicio</button><hr>
-<input type="file" id="imgInicio" accept="image/*"><button onclick="addImgInicio()">Agregar imagen a inicio (sobreescribir)</button><div id="adminImgs"></div>
-<h3>2. Noticias</h3><input id="notTit" placeholder="Titulo"><textarea id="notTxt" placeholder="Texto"></textarea><input type="file" id="notImg" accept="image/*"><button onclick="addNoticia()">Agregar noticia</button><div id="adminNoticias"></div>
-<h3>3. Soporte</h3><input id="sopName" placeholder="Nombre"><input id="sopLink" placeholder="Link"><button onclick="addSoporte()">Agregar link</button><div id="adminSoporte"></div>
-<h3>4. Servicios y Estaciones</h3>
-<input id="servName" placeholder="Nombre servicio ej: MBH L1"><input id="servPrecio" type="number" placeholder="Precio por tramo ej: 5"><button onclick="addServicio()">Agregar servicio</button>
-<div id="adminServ"></div>
+<div id="boletoWrap" class="card"><h3 style="color:var(--rojo);margin-bottom:12px">Tu Boleto</h3><div id="boletoReal" class="ticket-real"></div><button class="btn" style="margin-top:12px" onclick="window.print()">Imprimir</button><button class="btn btn-sec" style="margin-top:8px" onclick="document.getElementById('boletoWrap').style.display='none'">Cerrar</button></div>
 </div>
-</div>
-</div>
-<script>
-let data = JSON.parse(localStorage.getItem('uqt_data_v2') || '{"titulo":"CONECTANDO ROLEHAVEN","texto":"Terminal Intermodal de Mansiones - Wolf Court. El grupo de transporte más grande de RoleHaven.","imgs":[],"noticias":[],"soporte":[],"servicios":[{"id":"1","name":"MBH L1 - Ejemplo","precioTramo":5,"estaciones":[{"id":"e1","name":"Mansiones"},{"id":"e2","name":"Centro"},{"id":"e3","name":"Playa"},{"id":"e4","name":"Wolf Court"}]}]}');
-function save(){localStorage.setItem('uqt_data_v2',JSON.stringify(data));render();}
-function showSec(id){document.querySelectorAll('[id^=sec-]').forEach(e=>e.classList.add('hidden'));document.getElementById('sec-'+id).classList.remove('hidden');document.getElementById('sideMenu').classList.remove('open');}
-document.getElementById('menuBtn').onclick=()=>document.getElementById('sideMenu').classList.toggle('open');
-function showLogin(){showSec('login')}
-function login(){if(document.getElementById('user').value==='UQT' && document.getElementById('pass').value==='RoleHaven2026'){document.getElementById('adminLinks').classList.remove('hidden');document.getElementById('adminBtn').innerText='ADMIN ON';showSec('admin');}else document.getElementById('loginErr').innerText='Mal';}
-function logout(){document.getElementById('adminLinks').classList.add('hidden');document.getElementById('adminBtn').innerText='ADMIN LOGIN';showSec('inicio');}
-function render(){
-document.getElementById('inicioTitulo').innerText=data.titulo;document.getElementById('inicioTexto').innerText=data.texto;
-document.getElementById('editTitulo').value=data.titulo;document.getElementById('editTexto').value=data.texto;
-document.getElementById('inicioImgs').innerHTML=data.imgs.map(i=>`<img src="${i}" style="width:100%">`).join('');
-document.getElementById('adminImgs').innerHTML=data.imgs.map((i,idx)=>`<div><img src="${i}" width=100><button onclick="data.imgs.splice(${idx},1);save()" class="btn-sm">Borrar</button></div>`).join('');
-document.getElementById('listaNoticias').innerHTML=data.noticias.map(n=>`<div class=card><h3>${n.t}</h3>${n.img?`<img src="${n.img}" style="width:100%">`:''}<p>${n.txt}</p></div>`).join('');
-document.getElementById('previewNoticias').innerHTML=document.getElementById('listaNoticias').innerHTML;
-document.getElementById('adminNoticias').innerHTML=data.noticias.map((n,i)=>`<div class=card>${n.t}<button onclick="data.noticias.splice(${i},1);save()" class="btn-sm">Eliminar noticia</button></div>`).join('');
-document.getElementById('listaSoporte').innerHTML=data.soporte.map(s=>`<div class=card><a href="${s.link}" target=_blank style="color:var(--sec)">${s.name}</a></div>`).join('');
-document.getElementById('adminSoporte').innerHTML=data.soporte.map((s,i)=>`<div>${s.name}<button onclick="data.soporte.splice(${i},1);save()" class="btn-sm">Borrar link</button></div>`).join('');
-document.getElementById('listaServicios').innerHTML=data.servicios.map(s=>`
-<div class=card>
-<b style="color:var(--sec);font-size:18px">${s.name}</b><br><small>Precio por tramo: ${s.precioTramo} Robux</small>
-<div style="display:flex;gap:10px;margin-top:10px">
-<select id="desde-${s.id}">${s.estaciones.map((e,i)=>`<option value="${i}">${e.name}</option>`).join('')}</select>
-<select id="hasta-${s.id}">${s.estaciones.map((e,i)=>`<option value="${i}">${e.name}</option>`).join('')}</select>
-</div>
-<button onclick="calcular('${s.id}')">Calcular Precio</button>
-<div id="calc-${s.id}" class="calc-box hidden"></div>
-<div style="margin-top:10px;font-size:13px">${s.estaciones.map((e,i)=>`${i+1}. ${e.name}`).join(' → ')}</div>
-</div>`).join('');
-document.getElementById('adminServ').innerHTML=data.servicios.map(s=>`
-<div class=card>
-<b>${s.name} - ${s.precioTramo} Robux/tramo</b>
-<button onclick="delServ('${s.id}')" class="btn-sm" style="background:#a00;border-color:#a00">Borrar servicio</button>
-<div style="margin:10px 0"><input id="precioEdit-${s.id}" type="number" value="${s.precioTramo}" style="width:120px"><button onclick="editPrecio('${s.id}')" class="btn-sm">Actualizar Precio</button></div>
-<div>${s.estaciones.map((e,idx)=>`<div class="est-item">Estación ${idx+1}: ${e.name}<button onclick="delEst('${s.id}','${e.id}')" class="btn-sm">borrar</button></div>`).join('')}</div>
-<div style="display:flex;gap:5px;margin-top:10px"><input id="newEst-${s.id}" placeholder="Nueva estación"><button onclick="addEst('${s.id}')" class="btn-sm">Agregar +</button></div>
-</div>`).join('');
-}
-function calcular(sid){
-let s=data.servicios.find(x=>x.id==sid);
-let d=parseInt(document.getElementById('desde-'+sid).value);
-let h=parseInt(document.getElementById('hasta-'+sid).value);
-if(d===h){document.getElementById('calc-'+sid).classList.remove('hidden');document.getElementById('calc-'+sid).innerHTML='❌ Origen y destino iguales';return;}
-let tramos=Math.abs(h-d);
-let total=tramos * s.precioTramo;
-let box=document.getElementById('calc-'+sid);
-box.classList.remove('hidden');
-box.innerHTML=`Desde: <b>${s.estaciones[d].name}</b><br>Hasta: <b>${s.estaciones[h].name}</b><br>Tramos: ${tramos} x ${s.precioTramo} Robux<br><h2 style="color:var(--sec);margin:5px 0">Total: ${total} Robux</h2><button onclick="comprar('${s.name}','${s.estaciones[d].name}','${s.estaciones[h].name}',${total})">Comprar boleto</button>`;
-}
-function comprar(serv,desde,hasta,precio){alert(`Boleto: ${serv}\n${desde} → ${hasta}\nPrecio: ${precio} Robux\n\nContactá a un admin UQT en RoleHaven para pagarlo.`);}
-function guardarInicio(){data.titulo=document.getElementById('editTitulo').value;data.texto=document.getElementById('editTexto').value;save();}
-function addImgInicio(){let f=document.getElementById('imgInicio').files[0];if(!f)return;let r=new FileReader();r.onload=e=>{data.imgs=[e.target.result];save();};r.readAsDataURL(f);}
-function addNoticia(){let f=document.getElementById('notImg').files[0];let t=document.getElementById('notTit').value;let txt=document.getElementById('notTxt').value;let add=(img='')=>{data.noticias.unshift({id:Date.now(),t,txt,img});save();};if(f){let r=new FileReader();r.onload=e=>add(e.target.result);r.readAsDataURL(f);}else add();}
-function addSoporte(){data.soporte.push({id:Date.now(),name:document.getElementById('sopName').value,link:document.getElementById('sopLink').value});save();}
-function addServicio(){let n=document.getElementById('servName').value;let p=parseInt(document.getElementById('servPrecio').value)||5;if(!n)return;data.servicios.push({id:Date.now().toString(),name:n,precioTramo:p,estaciones:[]});save();}
-function delServ(id){data.servicios=data.servicios.filter(s=>s.id!=id);save();}
-function editPrecio(id){let s=data.servicios.find(x=>x.id==id);s.precioTramo=parseInt(document.getElementById('precioEdit-'+id).value);save();}
-function addEst(sid){let s=data.servicios.find(x=>x.id==sid);let name=document.getElementById('newEst-'+sid).value;if(!name)return;s.estaciones.push({id:Date.now().toString(),name});save();}
-function delEst(sid,eid){let s=data.servicios.find(x=>x.id==sid);s.estaciones=s.estaciones.filter(e=>e.id!=eid);save();}
-render();
+
+<div id="passModal"><div class="box"><h2>Insertar contraseña</h2><p style="font-size:13px;color:#555;margin-bottom:10px">Contraseña de Admin</p><input id="passInput" type="password" placeholder="Contraseña"><div id="passError" style="color:var(--rojo);font-size:12px;display:none;margin-bottom:10px">Contraseña incorrecta</div><button class="btn" onclick="checkPass()">Entrar</button><button class="btn btn-sec" style="margin-top:8px" onclick="closePass()">Cancelar</button></div></div>
+
+<script type="module">
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set, onValue, remove, push } from "firebase/database";
+const firebaseConfig = {
+  apiKey: "AIzaSyDyYyJk3lEIjWl9B0yLcd3B7f8eIYHWn_M",
+  authDomain: "centraladotmom.firebaseapp.com",
+  databaseURL: "https://centraladotmom-default-rtdb.firebaseio.com",
+  projectId: "centraladotmom",
+  storageBucket: "centraladotmom.firebasestorage.app",
+  messagingSenderId: "524503776536",
+  appId: "1:524503776536:web:b60e7d3c115b43049f326d",
+  measurementId: "G-2JDDE7HSTD"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const serviciosRef = ref(db, 'centralTMOM/servicios');
+const logoRef = ref(db, 'centralTMOM/logo');
+let servicios=[];let paradas=[];let logoData='';let isAdmin=false;let pendingBtn=null;
+const normalize = t => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+const normalizePass = t => t.toLowerCase().replace(/\s+/g,'').trim();
+window.switchTab=(t,btn)=>{if(t==='admin'&&!isAdmin){window.requestAdmin(btn);return;}document.getElementById('view-pasajero').style.display=t==='pasajero'?'block':'none';document.getElementById('view-admin').style.display=t==='admin'?'block':'none';document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+window.requestAdmin=(btn)=>{pendingBtn=btn;document.getElementById('passModal').style.display='flex';document.getElementById('passInput').value='';document.getElementById('passError').style.display='none';setTimeout(()=>document.getElementById('passInput').focus(),100);}
+window.closePass=()=>document.getElementById('passModal').style.display='none';
+window.checkPass=()=>{if(normalizePass(document.getElementById('passInput').value)==='unionadotmom'){isAdmin=true;closePass();document.getElementById('view-pasajero').style.display='none';document.getElementById('view-admin').style.display='block';document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tabAdm').classList.add('active');}else{document.getElementById('passError').style.display='block';}}
+window.logoutAdmin=()=>{isAdmin=false;document.getElementById('view-admin').style.display='none';document.getElementById('view-pasajero').style.display='block';document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tabPas').classList.add('active');}
+document.getElementById('passInput').addEventListener('keydown',e=>{if(e.key==='Enter')window.checkPass();});
+document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{set(logoRef, r.result);};r.readAsDataURL(f);});
+window.addParada=()=>{const n=prompt('Parada intermedia:');if(n){paradas.push(n);renderParadas();}}
+window.renderParadas=()=>{document.getElementById('paradasBox').innerHTML=paradas.map((p,i)=>`<span style='background:#ffe5e5;padding:4px 8px;border-radius:12px;font-size:12px;margin:2px;display:inline-block'>${p} <b onclick='paradas.splice(${i},1);renderParadas()' style='cursor:pointer'>x</b></span>`).join('');}
+window.agregarServicio=()=>{const s={id:Date.now(),operador:document.getElementById('opAdd').value,desde:document.getElementById('desdeAdd').value,hasta:document.getElementById('hastaAdd').value,empresa:document.getElementById('empresaAdd').value,precio:document.getElementById('precioAdd').value,hora:document.getElementById('horaAdd').value,dia:document.getElementById('diaAdd').value,paradas:[...paradas]};if(!s.desde||!s.hasta||!s.empresa)return alert('Falta desde/hasta/empresa');const newRef=push(serviciosRef);set(newRef,s);paradas=[];window.renderParadas();alert('Guardado en Firebase');}
+onValue(serviciosRef,(snap)=>{const data=snap.val();servicios=data?Object.values(data):[];renderAdmin();renderActivos();window._data=data;});
+onValue(logoRef,(snap)=>{logoData=snap.val()||'';if(logoData){document.getElementById('logoHeader').src=logoData;document.getElementById('logoHeader').style.display='block';}});
+function renderAdmin(){const c=document.getElementById('listaServ');if(!servicios.length){c.innerHTML='<small>Sin servicios</small>';return;}c.innerHTML=servicios.map(s=>`<div class='admin-item'><div><span class='badge'>${s.operador}</span> <b>${s.desde} → ${s.hasta}</b><br><small>${s.empresa} | R$ ${s.precio} | ${s.hora}</small></div><button class='btn' style='width:auto;padding:6px 10px' onclick='borrar(${s.id})'>Borrar</button></div>`).join('');}
+function renderActivos(){const c=document.getElementById('activos');if(!servicios.length){c.innerHTML='<small>No hay servicios activos</small>';return;}c.innerHTML=servicios.map(s=>`<div class='result'><span class='badge'>${s.operador} ACTIVO</span> <b>${s.desde} → ${s.hasta}</b> <small>${s.empresa} | ${s.hora} | R$ ${s.precio}</small></div>`).join('');}
+window.borrar=(id)=>{if(!window._data)return;for(let k in window._data){if(window._data[k].id==id){remove(ref(db,'centralTMOM/servicios/'+k));}}}
+window.buscar=()=>{const op=normalize(document.getElementById('opBusca').value),nombre=document.getElementById('nombreRol').value||'JUAN PEREZ',desde=normalize(document.getElementById('desdeBusca').value),hasta=normalize(document.getElementById('hastaBusca').value);if(!desde||!hasta)return alert('Pon desde y hasta');let exactos=servicios.filter(s=>{const sd=normalize(s.desde),sh=normalize(s.hasta);const mOp=op==='todos'||normalize(s.operador)===op;const mD=sd.includes(desde)||desde.includes(sd)||(s.paradas||[]).some(p=>normalize(p).includes(desde));const mH=sh.includes(hasta)||hasta.includes(sh)||(s.paradas||[]).some(p=>normalize(p).includes(hasta));return mOp&&mD&&mH;});let similares=[];if(!exactos.length){similares=servicios.filter(s=>{const sd=normalize(s.desde),sh=normalize(s.hasta);return sd.includes(desde)||desde.includes(sd)||sh.includes(hasta)||hasta.includes(sh);}).slice(0,5);}const r=document.getElementById('resultados');if(!exactos.length&&!similares.length){r.innerHTML=`<div style='background:#fff0f0;padding:12px;border-radius:10px'><h3>Malas noticias, ${nombre}</h3><p>No encontramos buses</p></div>`;return;}let html='';if(exactos.length){html+=`<h3 style='color:#d10024;margin-bottom:8px'>¡Buenas noticias ${nombre}! ${exactos.length} buses</h3>`+exactos.map(s=>`<div class='result'>${cardContent(s,nombre)}</div>`).join('');}if(similares.length){html+=`<h3 style='color:#d10024;margin:14px 0 8px'>Búsquedas similares</h3>`+similares.map(s=>`<div class='result similar'>${cardContent(s,nombre)}</div>`).join('');}r.innerHTML=html;}
+function cardContent(s,n){const d=document.getElementById('desdeBusca').value,h=document.getElementById('hastaBusca').value;return `<div><b>${s.empresa}</b> | ${s.hora} | R$ ${s.precio}<br><b>${s.desde} → ${s.hasta}</b></div><button class='btn' style='margin-top:8px' onclick='comprar(${s.id},"${n.replace(/"/g,'')}","${d.replace(/"/g,'')}","${h.replace(/"/g,'')}")'>Comprar</button>`;}
+function qr(){let h='';for(let i=0;i<81;i++)h+=`<div class='${Math.random()>.5?'b':''}'></div>`;return h;}
+window.comprar=(id,nombre,d,h)=>{const s=servicios.find(x=>x.id==id);const folio=('00'+Math.floor(Math.random()*9999999)).slice(-9);const oper=('00'+Math.floor(Math.random()*999999999)).slice(-9);const logoHtml=logoData?`<img src='${logoData}'>`:`<div class='txt-logo'>TMOM / ADO</div>`;document.getElementById('boletoReal').innerHTML=`<div class='compra'>COMPRA ANTICIPADA</div><div class='line-red-short'></div><div class='top'><div class='logo-box'>${logoHtml}</div><div class='qr-box'><div class='qr'>${qr()}</div><div style='font-size:9px'>ESCANEA TU BOLETO</div></div></div><div class='divider'></div><div class='field'><div class='lbl'>NOMBRE / NAME</div><div class='val'>${nombre}</div></div><div class='field'><div class='lbl'>OPERADOR</div><div class='val'>${s.operador}</div></div><div class='field'><div class='lbl'>EMPRESA</div><div class='val' style='font-size:18px'>${s.empresa}</div></div><div class='field'><div class='lbl'>ORIGEN</div><div class='val'>${d||s.desde}</div></div><div class='field'><div class='lbl'>DESTINO</div><div class='val'>${h||s.hasta}</div></div><div class='field'><div class='lbl'>FECHA</div><div class='val'>${s.dia||new Date().toLocaleDateString()}</div></div><div class='field'><div class='lbl'>HORA</div><div class='val'>${s.hora}</div></div><div class='field'><div class='lbl'>PRECIO</div><div class='val'>R$ ${s.precio}.00</div></div><div class='field small-val'><div class='lbl'>FOLIO</div><div class='val'>${folio}</div></div><div class='field small-val'><div class='lbl'>OPERACIÓN</div><div class='val'>${oper}</div></div><div class='divider'></div><div class='footer'><div class='legal'>CONSERVE SU BOLETO • AUTOBUSES TMOM / ADO<br>En caja virtual - Central TMOM/ADO</div><div><div class='barcode'></div><div style='font-size:9px'>${folio}${oper}</div></div></div>`;document.getElementById('boletoWrap').style.display='block';}
 </script>
 </body>
 </html>
