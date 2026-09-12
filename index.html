@@ -3,32 +3,41 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grupo UQT | RoleHaven</title>
+
+<link rel="icon" type="image/jpeg" href="https://i.ibb.co/HDPxz5J6/IMG-20260423-WA0013.jpg">
+<meta property="og:title" content="Grupo UQT | RoleHaven - Transporte Oficial">
+<meta property="og:description" content="El grupo de transporte más grande de RoleHaven. Terminal Intermodal Mansiones - Wolf Court.">
+<meta property="og:image" content="https://i.ibb.co/HDPxz5J6/IMG-20260423-WA0013.jpg">
+<meta property="og:url" content="https://GrupoUQT.github.io/Rolehaven">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1E4D6E">
+
 <style>
 :root{--main:#1E4D6E;--sec:#5DBF6A;--bg:#0a1218;--card:#13202d}
 body{margin:0;background:var(--bg);color:white;font-family:Inter,Arial,sans-serif}
 .top{position:fixed;top:0;width:100%;background:var(--main);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;z-index:100;border-bottom:3px solid var(--sec);box-sizing:border-box}
-.logo{font-weight:900;letter-spacing:1px}.logo span{color:var(--sec)}
-#menuBtn{font-size:26px;cursor:pointer;color:white}
+.logo{font-weight:900}.logo span{color:var(--sec)}
+#menuBtn{font-size:26px;cursor:pointer}
 #sideMenu{position:fixed;left:-300px;top:54px;width:280px;height:100%;background:#0e1c27;transition:0.3s;padding:20px;z-index:99;border-right:1px solid var(--main)}
 #sideMenu.open{left:0}
 #sideMenu a{display:block;padding:14px;color:white;text-decoration:none;border-bottom:1px solid #1a3247}
-#sideMenu a:hover{color:var(--sec);background:#13202d}
-#adminBtn{cursor:pointer;background:var(--sec);color:#0a1218;padding:6px 12px;border-radius:4px;font-size:13px;font-weight:900}
+#adminBtn{cursor:pointer;background:var(--sec);color:#0a1218;padding:6px 12px;border-radius:6px;font-size:13px;font-weight:900}
 .main{margin-top:70px;padding:20px}
-.hero{background:var(--card);padding:40px;border-left:5px solid var(--sec);position:relative;border-radius:8px}
-.hero img{max-width:100%;margin-top:20px;border-radius:8px;border:1px solid var(--main)}
+.hero{background:var(--card);padding:30px;border-left:5px solid var(--sec);border-radius:8px}
 .card{background:var(--card);padding:18px;margin:15px 0;border-radius:8px;border:1px solid #1a3247}
 .hidden{display:none}
-input,textarea,select{background:#0a1218;color:white;border:1px solid var(--main)}
-input,textarea,select,button{width:100%;padding:10px;margin:6px 0;border-radius:6px;box-sizing:border-box}
-button{background:var(--main);border:1px solid var(--sec);font-weight:bold;cursor:pointer;color:white;transition:0.2s}
+input,textarea,select{background:#0a1218;color:white;border:1px solid var(--main);width:100%;padding:10px;margin:6px 0;border-radius:6px;box-sizing:border-box}
+button{background:var(--main);border:1px solid var(--sec);color:white;padding:10px;border-radius:6px;width:100%;font-weight:bold;cursor:pointer;margin:6px 0}
 button:hover{background:var(--sec);color:#0a1218}
-.admin-panel{background:#0a1218;border:1px solid var(--sec);padding:20px;margin-top:20px;border-radius:10px}
+.btn-sm{width:auto;padding:5px 10px;font-size:12px;margin-left:6px}
+.admin-panel{background:#0a1218;border:1px solid var(--sec);padding:20px;border-radius:10px}
+.est-item{display:flex;justify-content:space-between;align-items:center;background:#13202d;padding:8px 12px;margin:5px 0;border-radius:6px;border-left:3px solid var(--sec)}
+.calc-box{background:#13202d;border:2px solid var(--sec);padding:15px;border-radius:8px;margin-top:10px}
 </style>
 </head>
 <body>
 <div class="top">
-<div style="display:flex;align-items:center;gap:15px"><span id="menuBtn">☰</span><div class="logo">GRUPO <span>UQT</span></div></div>
+<div style="display:flex;gap:15px;align-items:center"><span id="menuBtn">☰</span><div class="logo">GRUPO <span>UQT</span></div></div>
 <div id="adminBtn" onclick="showLogin()">ADMIN LOGIN</div>
 </div>
 
@@ -37,102 +46,88 @@ button:hover{background:var(--sec);color:#0a1218}
 <a href="#" onclick="showSec('noticias')">📰 Noticias</a>
 <a href="#" onclick="showSec('boletos')">🎫 Comprar Boletos</a>
 <a href="#" onclick="showSec('soporte')">💬 Soporte</a>
-<div id="adminLinks" class="hidden">
-<hr><b style="color:var(--sec)">ADMIN UQT</b>
-<a href="#" onclick="showSec('admin')">⚙️ Administración</a>
-<a href="#" onclick="logout()">🚪 Salir</a>
-</div>
+<div id="adminLinks" class="hidden"><hr><b style="color:var(--sec)">ADMIN UQT</b><a href="#" onclick="showSec('admin')">⚙️ Administración</a><a href="#" onclick="logout()">🚪 Salir</a></div>
 </div>
 
 <div class="main">
-<div id="sec-inicio">
-<div class="hero" id="heroBox">
-<h1 id="inicioTitulo">CONECTANDO ROLEHAVEN</h1>
-<p id="inicioTexto">Terminal Intermodal de Mansiones - Wolf Court. El grupo de transporte más grande de RoleHaven. Alianza UQT-ADO.</p>
-<div id="inicioImgs"></div>
-</div>
-<h2>Últimas Noticias</h2><div id="previewNoticias"></div>
-</div>
-
+<div id="sec-inicio"><div class="hero"><h1 id="inicioTitulo"></h1><p id="inicioTexto"></p><div id="inicioImgs"></div></div><h2>Últimas Noticias</h2><div id="previewNoticias"></div></div>
 <div id="sec-noticias" class="hidden"><h2>Noticias</h2><div id="listaNoticias"></div></div>
-<div id="sec-boletos" class="hidden"><h2>Comprar Boletos</h2><div id="listaServicios"></div></div>
+<div id="sec-boletos" class="hidden"><h2>Comprar Boletos - Desde / Hasta</h2><div id="listaServicios"></div></div>
 <div id="sec-soporte" class="hidden"><h2>Soporte</h2><div id="listaSoporte"></div></div>
-
-<div id="sec-login" class="hidden">
-<div class="card" style="max-width:350px;margin:auto">
-<h3>Login Administrador UQT</h3>
-<input id="user" placeholder="Usuario"><input id="pass" type="password" placeholder="Contraseña">
-<button onclick="login()">Entrar</button>
-<p id="loginErr" style="color:var(--sec)"></p>
-</div>
-</div>
-
+<div id="sec-login" class="hidden"><div class="card" style="max-width:350px;margin:auto"><h3>Login Admin</h3><input id="user" placeholder="UQT"><input id="pass" type="password"><button onclick="login()">Entrar</button><p id="loginErr"></p></div></div>
 <div id="sec-admin" class="hidden">
 <div class="admin-panel">
-<h2 style="color:var(--sec)">PANEL ADMIN UQT</h2>
+<h2 style="color:var(--sec)">PANEL ADMIN UQT - SISTEMA ESTACIONES</h2>
 <h3>1. Inicio</h3>
-<input id="editTitulo" placeholder="Titulo inicio"><textarea id="editTexto" placeholder="Texto inicio"></textarea>
-<button onclick="guardarInicio()">Modificar texto en inicio</button>
-<hr>
-<input type="file" id="imgInicio" accept="image/*"><button onclick="addImgInicio()">Agregar imagen a inicio (sistema de sobreescribir)</button>
-<div id="adminImgs"></div>
-<h3>2. Noticias</h3>
-<input id="notTit" placeholder="Titulo noticia"><textarea id="notTxt" placeholder="Texto"></textarea>
-<input type="file" id="notImg" accept="image/*">
-<button onclick="addNoticia()">Agregar noticia con imagen</button>
-<div id="adminNoticias"></div>
-<h3>3. Soporte</h3>
-<input id="sopName" placeholder="Nombre (ej: Ticket Discord)"><input id="sopLink" placeholder="Link https://...">
-<button onclick="addSoporte()">Agregar link a soporte</button>
-<div id="adminSoporte"></div>
-<h3>4. Administración de Ventas</h3>
-<input id="servName" placeholder="Nombre servicio (ej: MBH L1)"><button onclick="addServicio()">Agregar servicio</button>
+<input id="editTitulo"><textarea id="editTexto"></textarea><button onclick="guardarInicio()">Modificar texto en inicio</button><hr>
+<input type="file" id="imgInicio" accept="image/*"><button onclick="addImgInicio()">Agregar imagen a inicio (sobreescribir)</button><div id="adminImgs"></div>
+<h3>2. Noticias</h3><input id="notTit" placeholder="Titulo"><textarea id="notTxt" placeholder="Texto"></textarea><input type="file" id="notImg" accept="image/*"><button onclick="addNoticia()">Agregar noticia</button><div id="adminNoticias"></div>
+<h3>3. Soporte</h3><input id="sopName" placeholder="Nombre"><input id="sopLink" placeholder="Link"><button onclick="addSoporte()">Agregar link</button><div id="adminSoporte"></div>
+<h3>4. Servicios y Estaciones</h3>
+<input id="servName" placeholder="Nombre servicio ej: MBH L1"><input id="servPrecio" type="number" placeholder="Precio por tramo ej: 5"><button onclick="addServicio()">Agregar servicio</button>
 <div id="adminServ"></div>
-<div style="border:1px solid var(--main);padding:10px;margin-top:15px;border-radius:6px">
-<b>Agregar destino a [servicio]</b>
-<select id="selServ"></select><input id="destName" placeholder="Destino (ej: Playa)"><button onclick="addDestino()">Agregar destino a servicio</button>
-</div>
-<div style="border:1px solid var(--main);padding:10px;margin-top:15px;border-radius:6px">
-<b>Agregar precio</b>
-<select id="selServ2"></select><select id="selDest"></select><input id="precioVal" placeholder="Precio ej: 25 Robux"><button onclick="addPrecio()">Agregar precio</button>
 </div>
 </div>
 </div>
-</div>
-
 <script>
-let data = JSON.parse(localStorage.getItem('uqt_data') || '{"titulo":"CONECTANDO ROLEHAVEN","texto":"Terminal Intermodal de Mansiones - Wolf Court. El grupo de transporte más grande de RoleHaven. Alianza UQT-ADO.","imgs":[],"noticias":[{"id":1,"t":"Inauguración Terminal Mansiones","txt":"La más grande de RoleHaven, 400 Robux de inversión","img":""},{"id":2,"t":"Alianza UQT-ADO","txt":"Fusion de grupos, ahora somos el transporte más grande","img":""}],"soporte":[{"id":1,"name":"Ticket Discord Grupo UQT","link":"#"}],"servicios":[]}');
-let isAdmin=false;
-function save(){localStorage.setItem('uqt_data',JSON.stringify(data)); render();}
+let data = JSON.parse(localStorage.getItem('uqt_data_v2') || '{"titulo":"CONECTANDO ROLEHAVEN","texto":"Terminal Intermodal de Mansiones - Wolf Court. El grupo de transporte más grande de RoleHaven.","imgs":[],"noticias":[],"soporte":[],"servicios":[{"id":"1","name":"MBH L1 - Ejemplo","precioTramo":5,"estaciones":[{"id":"e1","name":"Mansiones"},{"id":"e2","name":"Centro"},{"id":"e3","name":"Playa"},{"id":"e4","name":"Wolf Court"}]}]}');
+function save(){localStorage.setItem('uqt_data_v2',JSON.stringify(data));render();}
 function showSec(id){document.querySelectorAll('[id^=sec-]').forEach(e=>e.classList.add('hidden'));document.getElementById('sec-'+id).classList.remove('hidden');document.getElementById('sideMenu').classList.remove('open');}
 document.getElementById('menuBtn').onclick=()=>document.getElementById('sideMenu').classList.toggle('open');
 function showLogin(){showSec('login')}
-function login(){if(document.getElementById('user').value==='UQT' && document.getElementById('pass').value==='RoleHaven2026'){isAdmin=true;document.getElementById('adminLinks').classList.remove('hidden');document.getElementById('adminBtn').innerText='ADMIN ON';showSec('admin');}else{document.getElementById('loginErr').innerText='Usuario o clave mal';}}
-function logout(){isAdmin=false;document.getElementById('adminLinks').classList.add('hidden');document.getElementById('adminBtn').innerText='ADMIN LOGIN';showSec('inicio');}
+function login(){if(document.getElementById('user').value==='UQT' && document.getElementById('pass').value==='RoleHaven2026'){document.getElementById('adminLinks').classList.remove('hidden');document.getElementById('adminBtn').innerText='ADMIN ON';showSec('admin');}else document.getElementById('loginErr').innerText='Mal';}
+function logout(){document.getElementById('adminLinks').classList.add('hidden');document.getElementById('adminBtn').innerText='ADMIN LOGIN';showSec('inicio');}
 function render(){
-document.getElementById('inicioTitulo').innerText=data.titulo;document.getElementById('inicioTexto').innerText=data.texto;document.getElementById('editTitulo').value=data.titulo;document.getElementById('editTexto').value=data.texto;
-document.getElementById('inicioImgs').innerHTML=data.imgs.map(i=>`<img src="${i}">`).join('');
-document.getElementById('adminImgs').innerHTML=data.imgs.map((i,idx)=>`<div><img src="${i}" style="width:100px"><button onclick="data.imgs.splice(${idx},1);save()">Borrar</button></div>`).join('');
+document.getElementById('inicioTitulo').innerText=data.titulo;document.getElementById('inicioTexto').innerText=data.texto;
+document.getElementById('editTitulo').value=data.titulo;document.getElementById('editTexto').value=data.texto;
+document.getElementById('inicioImgs').innerHTML=data.imgs.map(i=>`<img src="${i}" style="width:100%">`).join('');
+document.getElementById('adminImgs').innerHTML=data.imgs.map((i,idx)=>`<div><img src="${i}" width=100><button onclick="data.imgs.splice(${idx},1);save()" class="btn-sm">Borrar</button></div>`).join('');
 document.getElementById('listaNoticias').innerHTML=data.noticias.map(n=>`<div class=card><h3>${n.t}</h3>${n.img?`<img src="${n.img}" style="width:100%">`:''}<p>${n.txt}</p></div>`).join('');
 document.getElementById('previewNoticias').innerHTML=document.getElementById('listaNoticias').innerHTML;
-document.getElementById('adminNoticias').innerHTML=data.noticias.map((n,idx)=>`<div class=card>${n.t} <button onclick="data.noticias.splice(${idx},1);save()">Eliminar noticia</button></div>`).join('');
+document.getElementById('adminNoticias').innerHTML=data.noticias.map((n,i)=>`<div class=card>${n.t}<button onclick="data.noticias.splice(${i},1);save()" class="btn-sm">Eliminar noticia</button></div>`).join('');
 document.getElementById('listaSoporte').innerHTML=data.soporte.map(s=>`<div class=card><a href="${s.link}" target=_blank style="color:var(--sec)">${s.name}</a></div>`).join('');
-document.getElementById('adminSoporte').innerHTML=data.soporte.map((s,idx)=>`<div>${s.name} <button onclick="data.soporte.splice(${idx},1);save()">Borrar link de soporte</button></div>`).join('');
-document.getElementById('listaServicios').innerHTML=data.servicios.map(s=>`<div class=card><b style="color:var(--sec)">${s.name}</b><br>${s.destinos.map(d=>`→ ${d.name} - <span style="color:var(--sec)">${d.precio||'Sin precio'}</span> <button onclick="delDest('${s.id}','${d.id}')" style="width:auto;padding:4px 8px">Borrar [${d.name}] de [${s.name}]</button>`).join('<br>')}</div>`).join('');
-document.getElementById('adminServ').innerHTML=data.servicios.map((s,idx)=>`<div>${s.name} <button onclick="data.servicios.splice(${idx},1);save()" style="width:auto">Borrar servicio</button></div>`).join('');
-let opts=data.servicios.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-document.getElementById('selServ').innerHTML=opts;document.getElementById('selServ2').innerHTML=opts;updateDestOpts();
+document.getElementById('adminSoporte').innerHTML=data.soporte.map((s,i)=>`<div>${s.name}<button onclick="data.soporte.splice(${i},1);save()" class="btn-sm">Borrar link</button></div>`).join('');
+document.getElementById('listaServicios').innerHTML=data.servicios.map(s=>`
+<div class=card>
+<b style="color:var(--sec);font-size:18px">${s.name}</b><br><small>Precio por tramo: ${s.precioTramo} Robux</small>
+<div style="display:flex;gap:10px;margin-top:10px">
+<select id="desde-${s.id}">${s.estaciones.map((e,i)=>`<option value="${i}">${e.name}</option>`).join('')}</select>
+<select id="hasta-${s.id}">${s.estaciones.map((e,i)=>`<option value="${i}">${e.name}</option>`).join('')}</select>
+</div>
+<button onclick="calcular('${s.id}')">Calcular Precio</button>
+<div id="calc-${s.id}" class="calc-box hidden"></div>
+<div style="margin-top:10px;font-size:13px">${s.estaciones.map((e,i)=>`${i+1}. ${e.name}`).join(' → ')}</div>
+</div>`).join('');
+document.getElementById('adminServ').innerHTML=data.servicios.map(s=>`
+<div class=card>
+<b>${s.name} - ${s.precioTramo} Robux/tramo</b>
+<button onclick="delServ('${s.id}')" class="btn-sm" style="background:#a00;border-color:#a00">Borrar servicio</button>
+<div style="margin:10px 0"><input id="precioEdit-${s.id}" type="number" value="${s.precioTramo}" style="width:120px"><button onclick="editPrecio('${s.id}')" class="btn-sm">Actualizar Precio</button></div>
+<div>${s.estaciones.map((e,idx)=>`<div class="est-item">Estación ${idx+1}: ${e.name}<button onclick="delEst('${s.id}','${e.id}')" class="btn-sm">borrar</button></div>`).join('')}</div>
+<div style="display:flex;gap:5px;margin-top:10px"><input id="newEst-${s.id}" placeholder="Nueva estación"><button onclick="addEst('${s.id}')" class="btn-sm">Agregar +</button></div>
+</div>`).join('');
 }
-function updateDestOpts(){let sid=document.getElementById('selServ2').value;let serv=data.servicios.find(x=>x.id==sid);let dOpts=serv?serv.destinos.map(d=>`<option value="${d.id}">${d.name}</option>`).join(''):'';document.getElementById('selDest').innerHTML=dOpts;}
-document.getElementById('selServ2').addEventListener('change',updateDestOpts);
+function calcular(sid){
+let s=data.servicios.find(x=>x.id==sid);
+let d=parseInt(document.getElementById('desde-'+sid).value);
+let h=parseInt(document.getElementById('hasta-'+sid).value);
+if(d===h){document.getElementById('calc-'+sid).classList.remove('hidden');document.getElementById('calc-'+sid).innerHTML='❌ Origen y destino iguales';return;}
+let tramos=Math.abs(h-d);
+let total=tramos * s.precioTramo;
+let box=document.getElementById('calc-'+sid);
+box.classList.remove('hidden');
+box.innerHTML=`Desde: <b>${s.estaciones[d].name}</b><br>Hasta: <b>${s.estaciones[h].name}</b><br>Tramos: ${tramos} x ${s.precioTramo} Robux<br><h2 style="color:var(--sec);margin:5px 0">Total: ${total} Robux</h2><button onclick="comprar('${s.name}','${s.estaciones[d].name}','${s.estaciones[h].name}',${total})">Comprar boleto</button>`;
+}
+function comprar(serv,desde,hasta,precio){alert(`Boleto: ${serv}\n${desde} → ${hasta}\nPrecio: ${precio} Robux\n\nContactá a un admin UQT en RoleHaven para pagarlo.`);}
 function guardarInicio(){data.titulo=document.getElementById('editTitulo').value;data.texto=document.getElementById('editTexto').value;save();}
 function addImgInicio(){let f=document.getElementById('imgInicio').files[0];if(!f)return;let r=new FileReader();r.onload=e=>{data.imgs=[e.target.result];save();};r.readAsDataURL(f);}
 function addNoticia(){let f=document.getElementById('notImg').files[0];let t=document.getElementById('notTit').value;let txt=document.getElementById('notTxt').value;let add=(img='')=>{data.noticias.unshift({id:Date.now(),t,txt,img});save();};if(f){let r=new FileReader();r.onload=e=>add(e.target.result);r.readAsDataURL(f);}else add();}
-function addSoporte(){let n=document.getElementById('sopName').value;let l=document.getElementById('sopLink').value;data.soporte.push({id:Date.now(),name:n,link:l});save();}
-function addServicio(){let n=document.getElementById('servName').value;if(!n)return;data.servicios.push({id:Date.now().toString(),name:n,destinos:[]});save();}
-function addDestino(){let sid=document.getElementById('selServ').value;let s=data.servicios.find(x=>x.id==sid);if(!s)return;s.destinos.push({id:Date.now().toString(),name:document.getElementById('destName').value,precio:''});save();}
-function addPrecio(){let sid=document.getElementById('selServ2').value;let did=document.getElementById('selDest').value;let s=data.servicios.find(x=>x.id==sid);if(!s)return;let d=s.destinos.find(x=>x.id==did);if(d)d.precio=document.getElementById('precioVal').value;save();}
-function delDest(sid,did){let s=data.servicios.find(x=>x.id==sid);s.destinos=s.destinos.filter(d=>d.id!=did);save();}
+function addSoporte(){data.soporte.push({id:Date.now(),name:document.getElementById('sopName').value,link:document.getElementById('sopLink').value});save();}
+function addServicio(){let n=document.getElementById('servName').value;let p=parseInt(document.getElementById('servPrecio').value)||5;if(!n)return;data.servicios.push({id:Date.now().toString(),name:n,precioTramo:p,estaciones:[]});save();}
+function delServ(id){data.servicios=data.servicios.filter(s=>s.id!=id);save();}
+function editPrecio(id){let s=data.servicios.find(x=>x.id==id);s.precioTramo=parseInt(document.getElementById('precioEdit-'+id).value);save();}
+function addEst(sid){let s=data.servicios.find(x=>x.id==sid);let name=document.getElementById('newEst-'+sid).value;if(!name)return;s.estaciones.push({id:Date.now().toString(),name});save();}
+function delEst(sid,eid){let s=data.servicios.find(x=>x.id==sid);s.estaciones=s.estaciones.filter(e=>e.id!=eid);save();}
 render();
 </script>
 </body>
